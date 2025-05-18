@@ -30,4 +30,4 @@ class UserModelAdmin(BaseUserAdmin):
     ordering = ["email", 'id', 'username']
     filter_horizontal = []
 
-admin.site.register(MyUser, UserModelAdmin)
+admin.site.register(User, UserModelAdmin)
