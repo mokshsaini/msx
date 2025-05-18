@@ -13,5 +13,4 @@ class SignUp(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class login(APIView):
-    def post(self, request, format=None):
-        pass
+    pass

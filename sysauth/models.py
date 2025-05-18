@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 
-class MyUserManager(BaseUserManager):
+class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None, password2=None):
         """
         Creates and saves a User with the given email, username and password.
@@ -33,8 +33,8 @@ class MyUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-        
-class MyUser(AbstractBaseUser):
+
+class User(AbstractBaseUser):
     email = models.EmailField(
         verbose_name="email address",
         max_length=255,
@@ -46,7 +46,7 @@ class MyUser(AbstractBaseUser):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    objects = MyUserManager()
+    objects = UserManager()
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]
