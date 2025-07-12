@@ -30,6 +30,10 @@ class Listing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     minimum_bidvalue = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    is_active = models.BooleanField(default=True)
+    
 
     def __str__(self):
          return self.title
@@ -39,6 +43,7 @@ class Comment(models.Model):
     comment = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    commented_at = models.DateTimeField(auto_now=True)
 
 
 class Wishlist(models.Model):
@@ -50,4 +55,7 @@ class Bid(models.Model):
     bidvalue = models.DecimalField(max_digits=10, decimal_places=2)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     listing = models.ForeignKey(Listing, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.user} bid {self.bidvalue} on {self.listing} at {self.timestamp}"
